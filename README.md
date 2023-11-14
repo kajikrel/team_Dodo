@@ -7,3 +7,9 @@ bundle install
 ruby bin/server.rb
 ```
 起動後に、http://localhost:8000　にアクセス
+
+
+伊藤：参加：2023-11-15-00:01:00
+
+
+
