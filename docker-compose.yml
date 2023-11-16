@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0 # または任意のMySQLバージョン
+    environment:
+      MYSQL_ROOT_PASSWORD: password # 必要に応じて変更
+      MYSQL_DATABASE: sukemi # あなたのデータベース名
+      MYSQL_USER: user # ユーザー名
+      MYSQL_PASSWORD: userpassword # ユーザーのパスワード
+      TZ: Asia/Tokyo
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./docker-db-init:/docker-entrypoint-initdb.d
+
+volumes:
+  mysql-data:
