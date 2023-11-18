@@ -1,3 +1,14 @@
+@charset "utf-8";
+
+/* リセット */
+body,
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -6,7 +17,54 @@ body {
   color: #333;
 }
 
-h1 {
-  color: #555;
-  text-align: center;
+/* wrapper */
+#wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+/* フォーム */
+
+/* テーブル */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+thead th {
+  padding-bottom: 6px;
+  user-select: none;
+}
+
+tbody th {
+  position: relative;
+  width: 24px;
+  height: 36px;
+  user-select: none;
+}
+
+.hour {
+  position:absolute;
+  font-size: 14px;
+  top: -7px;
+  line-height: 1rem;
+}
+
+.hour-last {
+  top: 29px;
+}
+
+tbody td {
+  cursor: pointer;
+  border: 1px solid;
+  user-select: none;
+}
+
+/* スケジュールセル */
+.is-free {
+  background: red;
+}
+
+.is-free::after {
+  content: "◎";
 }
