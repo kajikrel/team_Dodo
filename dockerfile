@@ -1,6 +1,9 @@
 # Rubyのバージョン3.2.2をベースイメージとして使用
 FROM ruby:3.2.2
 
+# 依存関係のライブラリをインストール
+RUN apt-get update -qq && apt-get install -y default-libmysqlclient-dev
+
 # 作業ディレクトリを設定
 WORKDIR /app
 
@@ -15,4 +18,3 @@ COPY . /app
 
 # WEBrickサーバーを起動するためのコマンド
 CMD ["ruby", "bin/server.rb"]
-
