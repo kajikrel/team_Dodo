@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スケミ</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="wrapper">
+  <header>
+    <h1>スケミ</h1>
+    <div id="user-name-block"></div>
+  </header>
+  <main>
+    <input type="date" id="base-date">
+    <form action="" id="user-form">
+      <input type="text" name="user-name" id="user-name" placeholder="ニックネーム">
+      <input type="submit" value="決定">
+    </form>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 5px;
+      text-align: center;
+    }
+    th {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th></th> <!-- 時間枠のための空のヘッダ -->
+        <% (Date.today..Date.today+6).each do |date| %>
+          <th><%= date.strftime('%m/%d(%a)') %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% (9..16).each do |hour| %>
+        <tr>
+          <th><%= '%02d' % hour %></th> <!-- 時間を2桁表示 -->
+          <% (Date.today..Date.today+6).each do |date| %>
+            <td data-date="<%= date %>" data-hour="<%= hour %>"></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </main>
+  </div>
+  <script type="module" src="js/index.js"></script>
+</body>
+</html>
+
