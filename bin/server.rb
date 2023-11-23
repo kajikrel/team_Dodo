@@ -1,7 +1,7 @@
 require 'webrick'
 require 'mysql2'
 
-sleep(10)
+sleep 10
 
 # MySQLデータベースへの接続を設定
 client = Mysql2::Client.new(
