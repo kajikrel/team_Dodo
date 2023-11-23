@@ -1,9 +1,11 @@
 require 'webrick'
 require 'mysql2'
 
+sleep 10
+
 # MySQLデータベースへの接続を設定
 client = Mysql2::Client.new(
-  host: "team_dodo-db-1", # MySQLサーバーのホスト名
+  host: "db", # MySQLサーバーのホスト名
   username: "user", # MySQLユーザー名
   password: "userpassword", # MySQLパスワード
   database: "sukemi" # 使用するデータベース名
