@@ -1,5 +1,6 @@
 require 'webrick'
 require 'mysql2'
+require 'erb'
 
 sleep 10
 
@@ -13,7 +14,19 @@ client = Mysql2::Client.new(
 puts "Connected to the MySQL database successfully."
 
 root = File.expand_path '../public', __dir__
-server = WEBrick::HTTPServer.new Port: 8000, DocumentRoot: root
+server = WEBrick::HTTPServer.new(
+  Port: 8000,
+  DocumentRoot: root,
+  DirectoryIndex: ['index.erb']
+)
+
+server.mount_proc '/' do |req, res|
+  template_path = File.join(root, '../public/index.erb') # publicディレクトリにあるERBファイルのパス
+  erb = ERB.new(File.read(template_path))
+  res.content_type = 'text/html; charset=UTF-8'
+  res.body = erb.result(binding)
+end
+
 
 trap 'INT' do server.shutdown end
 
