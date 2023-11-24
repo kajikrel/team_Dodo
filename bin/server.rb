@@ -22,6 +22,9 @@ server = WEBrick::HTTPServer.new(
 # CSS ファイルに対するリクエストの処理
 server.mount('/css', WEBrick::HTTPServlet::FileHandler, File.join(root, 'css'))
 
+# JavaScript ファイルに対するリクエストの処理
+server.mount('/js', WEBrick::HTTPServlet::FileHandler, File.join(root, 'js'))
+
 # ERB ファイルの処理
 server.mount_proc '/' do |req, res|
   template_path = File.join(root, 'index.erb')
