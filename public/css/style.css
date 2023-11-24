@@ -68,3 +68,14 @@ tbody td {
 .is-free::after {
   content: "◎";
 }
+
+
+/* 色 */
+
+.yellow {
+  background-color: yellow;
+}
+
+.skyblue {
+  background-color: skyblue;
+}

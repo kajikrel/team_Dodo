@@ -19,6 +19,10 @@ server = WEBrick::HTTPServer.new(
   DocumentRoot: root,
   DirectoryIndex: ['index.erb']
 )
+# CSS ファイルに対するリクエストの処理
+server.mount('../css', WEBrick::HTTPServlet::FileHandler, File.join(root, 'css'))
+
+# ERB ファイルの処理
 
 server.mount_proc '/' do |req, res|
   template_path = File.join(root, '../public/index.erb') # publicディレクトリにあるERBファイルのパス

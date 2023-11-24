@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スケミ</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="wrapper">
+    <header>
+      <h1>スケミ</h1>
+      <div id="user-name-block"></div>
+    </header>
+    <main>
+      <input type="date" id="base-date">
+      <form action="" id="user-form">
+        <input type="text" name="user-name" id="user-name" placeholder="ニックネーム">
+        <input type="submit" value="決定">
+      </form>
+      <div>
+        <button data-userid="1" class="user-button" style="background: yellow; cursor: pointer">原田</button>
+        <button data-userid="2" class="user-button" style="background: skyblue; cursor: pointer">梶原</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th></th> <!-- 時間枠のための空のヘッダ -->
+            <% (Date.today..Date.today+6).each do |date| %>
+              <th><%= date.strftime('%m/%d(%a)') %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% (9..16).each do |hour| %>
+            <tr>
+              <th><%= '%02d' % hour %></th> <!-- 時間を2桁表示 -->
+              <% (Date.today..Date.today+6).each do |date| %>
+                <td data-date="<%= date %>" data-hour="<%= hour %>"></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <form action="" id="save-form">
+        <input type="submit" value="保存" id="save-button">
+      </form>
+    </main>
+  </div>
+  <%# <script type="module" src="js/index.js"></script> %>
+<script>
+
+    // ボタンをおしたユーザーを認識
+    let currentUserId;
+
+    let userColor;
+
+    const userButtons = document.querySelectorAll('.user-button');
+    userButtons.forEach((userButton) => {
+      userButton.addEventListener('click', () => {
+        currentUserId = userButton.dataset.userid;
+        if (currentUserId === "1") {
+          userColor = "yellow";
+        } else if (currentUserId === "2") {
+          userColor = "skyblue";
+        }
+      });
+    });
+
+
+    const saveForm = document.getElementById('save-form');
+    saveForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert(currentUserId);
+    });
+
+
+    // DOM 取得
+    const scheduleTable = document.querySelector('table');
+    const schedules = document.querySelectorAll('tbody td');
+
+    // mousedown の状態を保持
+    let isMouseDown = false;
+
+    // ドラッグでセルの見た目を変える(追加のみ)関数
+    const addCellStyleByDrag = () => {
+      schedules.forEach(schedule => {
+        schedule.addEventListener('mousedown', () => {
+          isMouseDown = true;
+        });
+        schedule.addEventListener('mouseup', () => {
+          isMouseDown = false;
+        });
+        schedule.addEventListener('mousemove', event => {
+          if (isMouseDown) {;
+            schedule.classList.add(userColor);
+          }
+        });
+      });
+    };
+
+    // クリックでセルの見た目を変える(追加 & 除去)関数
+    const toggleCellStyleByClick = () => {
+      schedules.forEach(schedule => {
+        schedule.addEventListener('click', () => {
+          schedule.classList.toggle(userColor);
+        });
+      });
+    }
+
+    // テーブルからマウスポインタが出た時は isMouseDown を false にする
+    scheduleTable.addEventListener('mouseleave', () => {
+      isMouseDown = false;
+    });
+// ドラッグしたときのデフォルトの挙動をキャンセル
+    schedules.forEach(schedule => {
+      schedule.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+      });
+    });
+
+    addCellStyleByDrag();
+    toggleCellStyleByClick();
+
+  </script>
+</body>
+</html>
