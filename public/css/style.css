@@ -63,19 +63,16 @@ tbody td {
 /* スケジュールセル */
 .is-free {
   background: red;
+} 
+
+.yellow {
+  background: yellow;
+}
+
+.skyblue {
+  background: skyblue;
 }
 
 .is-free::after {
   content: "◎";
-}
-
-
-/* 色 */
-
-.yellow {
-  background-color: yellow;
-}
-
-.skyblue {
-  background-color: skyblue;
 }
