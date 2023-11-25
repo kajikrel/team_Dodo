@@ -2,7 +2,7 @@ require 'webrick'
 require 'mysql2'
 require 'erb'
 
-sleep 10
+# sleep 10
 
 # MySQLデータベースへの接続を設定
 client = Mysql2::Client.new(
@@ -36,6 +36,33 @@ server.mount_proc '/' do |req, res|
   res.content_type = 'text/html; charset=UTF-8' # コンテントタイプを指定
   res.body = erb.result(binding) # ERBテンプレートをレンダリングしてレスポンスのボディに設定
 end
+
+# ユーザー名をデータベースに保存するメソッド
+def add_user(client, user_name)
+  statement = client.prepare("INSERT INTO users (user_name) VALUES (?)")
+  statement.execute(user_name)
+end
+
+# ユーザー名を受け取り、データベースに保存するためのエンドポイント
+server.mount_proc '/add_user' do |req, res|
+  if req.request_method == 'POST'
+    # フォームデータからユーザー名を取得
+    user_name = req.query['user_name']
+    
+    # データベースにユーザー名を保存
+    add_user(client, user_name)
+    
+    # 成功メッセージを設定（またはリダイレクトなどを実行）
+    res.body = "User name '#{user_name}' has been saved successfully!"
+    res.content_type = 'text/html; charset=UTF-8'
+  else
+    # GETリクエストの場合は、フォームを表示
+    res.set_redirect(WEBrick::HTTPStatus::TemporaryRedirect, '/')
+  end
+end
+
+
+
 
 # Ctrl+Cが押されたときにサーバーをシャットダウンするためのトラップを設定
 trap 'INT' do server.shutdown end
