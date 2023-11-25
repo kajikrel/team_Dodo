@@ -10,6 +10,7 @@ client = Mysql2::Client.new(
   username: "user", # MySQLユーザー名
   password: "userpassword", # MySQLパスワード
   database: "sukemi" # 使用するデータベース名
+  encoding: "utf8mb4"#接続文字セット
 )
 puts "Connected to the MySQL database successfully."
 
