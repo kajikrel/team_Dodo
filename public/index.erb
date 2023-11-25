@@ -58,6 +58,8 @@
     const userButtons = document.querySelectorAll('.user-button');
     userButtons.forEach((userButton) => {
       userButton.addEventListener('click', () => {
+        // console.log(userButton);
+        console.log(userButton.dataset.userid);
         currentUserId = userButton.dataset.userid;
         if (currentUserId === "1") {
           userColor = "yellow";
@@ -91,8 +93,8 @@
         schedule.addEventListener('mouseup', () => {
           isMouseDown = false;
         });
-        schedule.addEventListener('mousemove', event => {
-          if (isMouseDown) {;
+        schedule.addEventListener('mousemove', () => {
+          if (isMouseDown) {
             schedule.classList.add(userColor);
           }
         });
