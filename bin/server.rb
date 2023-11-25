@@ -16,21 +16,26 @@ puts "Connected to the MySQL database successfully."
 root = File.expand_path '../public', __dir__
 server = WEBrick::HTTPServer.new(
   Port: 8000,
-  DocumentRoot: root,
-  DirectoryIndex: ['index.erb']
+  DocumentRoot: root
 )
 # CSS ファイルに対するリクエストの処理
 server.mount('../css', WEBrick::HTTPServlet::FileHandler, File.join(root, 'css'))
 
 # ERB ファイルの処理
 
+# CSS ファイルに対するリクエストの処理
+server.mount('/css', WEBrick::HTTPServlet::FileHandler, File.join(root, 'css'))
+
+# JavaScript ファイルに対するリクエストの処理
+server.mount('/js', WEBrick::HTTPServlet::FileHandler, File.join(root, 'js'))
+
+# ERB ファイルの処理
 server.mount_proc '/' do |req, res|
-  template_path = File.join(root, '../public/index.erb') # publicディレクトリにあるERBファイルのパス
+  template_path = File.join(root, 'index.erb')
   erb = ERB.new(File.read(template_path))
   res.content_type = 'text/html; charset=UTF-8'
   res.body = erb.result(binding)
 end
-
 
 trap 'INT' do server.shutdown end
 
