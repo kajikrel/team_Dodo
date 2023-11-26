@@ -1,73 +1,68 @@
-    // ボタンをおしたユーザーを認識
-    let currentUserId;
+// モジュールスコープの変数
+let currentUserId;
+let userColor;
+let isMouseDown = false;
 
-    let userColor;
+// ユーザーボタンのクリックイベントを設定
+const userButtons = document.querySelectorAll('.user-button');
+userButtons.forEach((userButton) => {
+  userButton.addEventListener('click', () => {
+    currentUserId = userButton.dataset.userid;
+    userColor = currentUserId === "1" ? "yellow" : "skyblue";
+    // 色が変更されたことを示すためのログ
+    console.log(`User ID: ${currentUserId}, Color: ${userColor}`);
+  });
+});
 
-    const userButtons = document.querySelectorAll('.user-button');
-    userButtons.forEach((userButton) => {
-      userButton.addEventListener('click', () => {
-        // console.log(userButton);
-        console.log(userButton.dataset.userid);
-        currentUserId = userButton.dataset.userid;
-        if (currentUserId === "1") {
-          userColor = "yellow";
-        } else if (currentUserId === "2") {
-          userColor = "skyblue";
-        }
-      });
-    });
+// 保存フォームの送信イベントを設定
+const saveForm = document.getElementById('save-form');
+saveForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert(`Saving for User ID: ${currentUserId}`);
+});
 
+// スケジュールテーブルを取得
+const scheduleTable = document.querySelector('table');
 
-    const saveForm = document.getElementById('save-form');
-    saveForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert(currentUserId);
-    });
-
-
-    // DOM 取得
-    const scheduleTable = document.querySelector('table');
-    const schedules = document.querySelectorAll('tbody td');
-
-    // mousedown の状態を保持
-    let isMouseDown = false;
-
-    // ドラッグでセルの見た目を変える(追加のみ)関数
-    const addCellStyleByDrag = () => {
-      schedules.forEach(schedule => {
-        schedule.addEventListener('mousedown', () => {
-          isMouseDown = true;
-        });
-        schedule.addEventListener('mouseup', () => {
-          isMouseDown = false;
-        });
-        schedule.addEventListener('mousemove', () => {
-          if (isMouseDown) {
-            schedule.classList.add(userColor);
-          }
-        });
-      });
-    };
-
-    // クリックでセルの見た目を変える(追加 & 除去)関数
-    const toggleCellStyleByClick = () => {
-      schedules.forEach(schedule => {
-        schedule.addEventListener('click', () => {
-          schedule.classList.toggle(userColor);
-        });
-      });
+// ドラッグとクリックのスタイル変更機能を追加
+const addCellStyleByDragAndClick = () => {
+  scheduleTable.addEventListener('mousedown', (event) => {
+    if (event.target.tagName === 'TD') {
+      isMouseDown = true;
+      // mousedown時の色を適用
+      event.target.style.backgroundColor = userColor;
     }
+  });
 
-    // テーブルからマウスポインタが出た時は isMouseDown を false にする
-    scheduleTable.addEventListener('mouseleave', () => {
-      isMouseDown = false;
-    });
-// ドラッグしたときのデフォルトの挙動をキャンセル
-    schedules.forEach(schedule => {
-      schedule.addEventListener('dragstart', (e) => {
-        e.preventDefault();
-      });
-    });
+  scheduleTable.addEventListener('mouseup', () => {
+    isMouseDown = false;
+  });
 
-    addCellStyleByDrag();
-    toggleCellStyleByClick();
+  scheduleTable.addEventListener('mousemove', (event) => {
+    if (isMouseDown && event.target.tagName === 'TD') {
+      event.target.style.backgroundColor = userColor;
+    }
+  });
+
+  scheduleTable.addEventListener('click', (event) => {
+    if (event.target.tagName === 'TD') {
+      // クリックしたセルの背景色をトグル
+      event.target.style.backgroundColor = 
+        event.target.style.backgroundColor === userColor ? '' : userColor;
+    }
+  });
+
+  scheduleTable.addEventListener('mouseleave', () => {
+    isMouseDown = false;
+  });
+
+  // ドラッグ開始時のデフォルト動作をキャンセル
+  scheduleTable.addEventListener('dragstart', (e) => {
+    e.preventDefault();
+  });
+};
+
+// ページロード後にスタイル変更機能を有効化
+document.addEventListener('DOMContentLoaded', () => {
+  addCellStyleByDragAndClick();
+});
