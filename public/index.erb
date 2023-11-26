@@ -30,15 +30,8 @@
           <!-- ここに、選択された日付から1週間分の th を入れていく -->
         </tr>
       </thead>
-        <tbody>
-          <% (9..16).each do |hour| %>
-            <tr>
-              <th><%= '%02d' % hour %></th> <!-- 時間を2桁表示 -->
-              <% (Date.today..(Date.today + 6)).each do |date| %>
-                <td data-date="<%= date %>" data-hour="<%= hour %>"></td>
-              <% end %>
-            </tr>
-          <% end %>
+        <tbody id='draggable-date-section'>
+
         </tbody>
     </table>
     <form action="" id="save-form">
@@ -47,6 +40,7 @@
   </main>
   </div>
   <script type="module" src="js/index.js"></script>
+    <script type="module" src="js/putSchedule.js"></script>
   <script type="module" src="js/button.js"></script>
 </body>
 </html>
