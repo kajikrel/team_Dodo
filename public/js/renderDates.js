@@ -20,9 +20,12 @@ baseDateInput.addEventListener('input', () => {
 // 日付を1週間分表示する関数
 const renderDates = (baseDate) => {
   for (let i = 0; i < 7; i++) {
-    const month = baseDate.getMonth() + 1; // month は 0 が 1 月なので、表示するときには 1 を足す ※月をまたぐ場合の処理が未実装
-    const date = baseDate.getDate() + i; // ※月をまたぐ場合の処理が未実装
-    const day = dayOfWeek[(baseDate.getDay() + i) % 7];
+    const currentDay = new Date(baseDate); // ベースの日付をコピー
+    currentDay.setDate(baseDate.getDate() + i); // 日付を進める
+
+    const month = currentDay.getMonth() + 1; // 月
+    const date = currentDay.getDate(); // 日
+    const day = dayOfWeek[currentDay.getDay()]; // 曜日
 
     const date_th = document.createElement('th');
     date_th.textContent = `${month}/${date}(${day})`;
@@ -30,5 +33,6 @@ const renderDates = (baseDate) => {
     datesParent.appendChild(date_th);
   }
 }
+
 
 export { renderDates };
