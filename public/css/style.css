@@ -76,3 +76,24 @@ tbody td {
 /* .is-free::after {
   content: "◎";
 } */
+
+/* セル分割用 */
+td {
+  height: 30px;
+}
+
+.container-cell {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.user1-cell {
+  flex: 1;
+  background: yellow;
+}
+
+.user2-cell {
+  flex: 1;
+  background: skyblue;
+}
