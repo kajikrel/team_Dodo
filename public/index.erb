@@ -14,13 +14,23 @@
   </header>
   <main>
     <input type="date" id="base-date">
-    <form action="" id="user-form">
-      <input type="text" name="user-name" id="user-name" placeholder="ニックネーム">
+    <form action="/add_user" id="user-form" method="post">
+      <input type="text" name="user_name" id="user-name" placeholder="ニックネーム">
       <input type="submit" value="決定">
     </form>
     <div>
-      <button data-userid="1" class="user-button" style="background: yellow; cursor: pointer">原田</button>
-      <button data-userid="2" class="user-button" style="background: skyblue; cursor: pointer">梶原</button>
+      <% if defined?(user_1) && user_1 && user_1['user_id'] %>
+        <button data-userid="1" class="user-button" style="background: yellow; cursor: pointer"><%= user_1['user_name'] %></button>
+      <% else %>
+        <button data-userid="1" class="user-button" style="background: yellow; cursor: pointer"></button>
+      <% end %>
+
+      <% if defined?(user_2) && user_2 && user_2['user_id'] %>
+        <button data-userid="2" class="user-button" style="background: skyblue; cursor: pointer"><%= user_2['user_name'] %></button>
+      <% else %>
+        <button data-userid="2" class="user-button" style="background: skyblue; cursor: pointer"></button>
+      <% end %>
+      
     </div>
     <table>
       <thead>
@@ -42,5 +52,7 @@
   <script type="module" src="js/index.js"></script>
     <script type="module" src="js/putSchedule.js"></script>
   <script type="module" src="js/button.js"></script>
+    <script type="module" src="js/saveName.js"></script>
+
 </body>
 </html>
