@@ -7,7 +7,7 @@ const datesParent = document.querySelector('thead tr');
 // 曜日名
 const dayOfWeek = ['日', '月', '火', '水', '木', '金', '土'];
 
-// 日付が選択されたら th の日付を更新
+// 日付が選択されたら、 th の日付を更新 & td の data-date を更新
 baseDateInput.addEventListener('input', () => {
   const baseDate = new Date(baseDateInput.value);
   const dates = document.querySelectorAll('.date');
@@ -15,6 +15,7 @@ baseDateInput.addEventListener('input', () => {
     date.remove();
   });
   renderDates(baseDate);
+  renderDraggableTableData(baseDate);
 });
 
 // th に日付を1週間分表示する関数
@@ -34,7 +35,7 @@ const renderDates = (baseDate) => {
   }
 };
 
-// スケジュールテーブルの生成
+// スケジュールテーブルを生成する関数
 const renderDraggableTableData = (baseDate) => {
   const padToTwoDigits = (number) => number.toString().padStart(2, '0');
 
