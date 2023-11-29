@@ -2,7 +2,7 @@ require 'webrick'
 require 'mysql2'
 require 'erb'
 
-sleep 10
+# sleep 10
 
 # MySQLデータベースへの接続を設定
 client = Mysql2::Client.new(
@@ -33,6 +33,37 @@ server.mount_proc '/' do |req, res|
   res.body = erb.result(binding)
 end
 
+# ユーザー名をデータベースに保存するメソッド
+def add_user(client, user_name)
+  statement = client.prepare("INSERT INTO users (user_name) VALUES (?)")
+  statement.execute(user_name)
+end
+
+# ユーザー名を受け取り、データベースに保存するためのエンドポイント
+server.mount_proc '/add_user' do |req, res|
+  if req.request_method == 'POST'
+    # フォームデータからユーザー名を取得
+    user_name = req.query['user_name']
+    
+    # データベースにユーザー名を保存
+    add_user(client, user_name)
+    
+    # 単純なテキストメッセージを返す
+    res.body = "User name '#{user_name}' has been saved successfully!"
+    res.content_type = 'text/plain; charset=UTF-8' # MIMEタイプをtext/plainに変更
+  else
+    # GETリクエストの場合は、フォームを表示
+    res.set_redirect(WEBrick::HTTPStatus::TemporaryRedirect, '/')
+  end
+end
+
+# ユーザー情報を取得（ユーザーIDが1）
+user_id_1 = 1
+user_1 = client.query("SELECT user_name FROM users WHERE id = #{user_id_1}").first
+
+# ユーザー情報を取得（ユーザーIDが2）
+user_id_2 = 2
+user_2 = client.query("SELECT user_name FROM users WHERE id = #{user_id_2}").first
 trap 'INT' do server.shutdown end
 
 server.start

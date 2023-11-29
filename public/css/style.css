@@ -61,10 +61,39 @@ tbody td {
 }
 
 /* スケジュールセル */
-.is-free {
+/* .is-free {
   background: red;
+}  */
+
+.yellow {
+  background: yellow;
 }
 
-.is-free::after {
+.skyblue {
+  background: skyblue;
+}
+
+/* .is-free::after {
   content: "◎";
+} */
+
+/* セル分割用 */
+td {
+  height: 30px;
+}
+
+.container-cell {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.user1-cell {
+  flex: 1;
+  background: yellow;
+}
+
+.user2-cell {
+  flex: 1;
+  background: skyblue;
 }
