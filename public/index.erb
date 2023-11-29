@@ -19,18 +19,11 @@
       <input type="submit" value="決定">
     </form>
     <div>
-      <% if defined?(user_1) && user_1 && user_1['user_id'] %>
-        <button data-userid="1" class="user-button" style="background: yellow; cursor: pointer"><%= user_1['user_name'] %></button>
-      <% else %>
-        <button data-userid="1" class="user-button" style="background: yellow; cursor: pointer"></button>
+    <% if defined?(users) %>
+      <% (users).each do |user| %>
+        <button data-userid="<%= user["id"]%>" class="user-button" style="background:<%= user["color"]%> ; cursor: pointer"><%= user["user_name"] %></button>
       <% end %>
-
-      <% if defined?(user_2) && user_2 && user_2['user_id'] %>
-        <button data-userid="2" class="user-button" style="background: skyblue; cursor: pointer"><%= user_2['user_name'] %></button>
-      <% else %>
-        <button data-userid="2" class="user-button" style="background: skyblue; cursor: pointer"></button>
-      <% end %>
-      
+    <% end %>
     </div>
     <table>
       <thead>

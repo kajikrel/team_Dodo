@@ -57,13 +57,8 @@ server.mount_proc '/add_user' do |req, res|
   end
 end
 
-# ユーザー情報を取得（ユーザーIDが1）
-user_id_1 = 1
-user_1 = client.query("SELECT user_name FROM users WHERE id = #{user_id_1}").first
+users = client.query("SELECT * FROM users")
 
-# ユーザー情報を取得（ユーザーIDが2）
-user_id_2 = 2
-user_2 = client.query("SELECT user_name FROM users WHERE id = #{user_id_2}").first
 trap 'INT' do server.shutdown end
 
 server.start
