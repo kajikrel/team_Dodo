@@ -41,8 +41,6 @@ mysql -u root -p
 docker-compose down
 ```
 
-
-
 What men???
 
-
+mysql -u root -proot test --default-character-set=utf8 < hogehoge.sql
