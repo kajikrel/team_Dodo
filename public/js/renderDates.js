@@ -6,7 +6,7 @@ const datesParent = document.querySelector("thead tr");
 const draggableDateSectionElement = document.getElementById("draggable-date-section");
 
 // 曜日名
-const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
+const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 // 日付が選択されたときのイベント
 baseDateInput.addEventListener("input", () => {
@@ -30,7 +30,7 @@ const renderDates = (baseDate) => {
     const day = dayOfWeek[currentDay.getDay()]; // 曜日
 
     const date_th = document.createElement("th");
-    date_th.textContent = `${month}/${date}(${day})`;
+    date_th.innerHTML = `<div>${month}/${date}<div><div class="day">${day}</div>`;
     date_th.classList.add("date");
     datesParent.appendChild(date_th);
   }

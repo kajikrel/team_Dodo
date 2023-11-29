@@ -9,26 +9,132 @@ p {
   margin: 0;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-  color: #333;
+a {
+  color: inherit;
+  text-decoration: 0;
 }
 
-/* wrapper */
-#wrapper {
-  width: 1200px;
+button {
+  padding: 0;
+  border: 0;
+  background-color: inherit;
+}
+
+/* 全体 */
+body {
+  font-family: 'Kosugi', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #F3F1ED;
+  color: #333;
+  letter-spacing: 0.07em;
+}
+
+main {
+  width: 1000px;
   margin: 0 auto;
 }
 
-/* フォーム */
+/* 名前などを入力するエリア */
+.input-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 36px 0;
+}
 
-/* テーブル */
+.form-wrapper {
+  position: relative;
+}
+
+.input-label {
+  position: absolute;
+  font-size: 12px;
+  top: -18px;
+}
+
+.input {
+  width: 170px;
+  padding: 8px;
+  border-radius: 24px;
+  border: 1px solid #333;
+}
+
+.add-button {
+  background-color: #DEC9BD;
+  border: 1px solid #333;
+  border-radius: 16px;
+  font-size: 13px;
+  padding: 4px 14px;
+  cursor: pointer;
+}
+
+.user-button {
+  display: block;
+  font-size: 14px;
+}
+
+.user-button-container {
+  display: flex;
+  position: relative;
+  gap: 18px;
+}
+
+.user-button-wrapper {
+  position: relative;
+}
+
+.user-button {
+  width: 74px;
+  height: 44px;
+  border-radius: 24px;
+  border: 1px solid #333;
+  text-align: center;
+  line-height: 44px;
+}
+
+.user-button-wrapper:first-child>.user-button {
+  background-color: #FFD66E;
+}
+
+.user-button-wrapper:nth-child(2) .user-button {
+  background-color: #4AD6D9;
+}
+
+.user-button-wrapper:nth-child(3) .user-button {
+  background-color: #FF7394;
+}
+
+.user-button-wrapper:nth-child(4) .user-button {
+  background-color: #7DDEAB;
+}
+
+.delete-button {
+  position: absolute;
+  right: 0;
+  color: #666;
+  cursor: pointer;
+}
+
+.day {
+  font-size: 12px;
+}
+
+/* スケジュールエリア */
+.schedule-display-area {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  padding: 50px 30px 60px;
+  background-color: #FFF;
+  border: 1px solid #333;
+  border-radius: 30px;
+}
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
+  margin: 0 auto;
+  width: 840px;
 }
 
 thead th {
@@ -43,8 +149,9 @@ tbody th {
   user-select: none;
 }
 
+/* 仮 */
 .hour {
-  position:absolute;
+  position: absolute;
   font-size: 14px;
   top: -7px;
   line-height: 1rem;
@@ -58,12 +165,9 @@ tbody td {
   cursor: pointer;
   border: 1px solid;
   user-select: none;
+  width: 100px;
+  height: 50px;
 }
-
-/* スケジュールセル */
-/* .is-free {
-  background: red;
-}  */
 
 .yellow {
   background: yellow;
@@ -71,15 +175,6 @@ tbody td {
 
 .skyblue {
   background: skyblue;
-}
-
-/* .is-free::after {
-  content: "◎";
-} */
-
-/* セル分割用 */
-td {
-  height: 30px;
 }
 
 .container-cell {
