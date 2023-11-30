@@ -89,19 +89,19 @@ main {
   line-height: 44px;
 }
 
-.user-button-wrapper:first-child>.user-button {
+.user-button-1 {
   background-color: #FFD66E;
 }
 
-.user-button-wrapper:nth-child(2) .user-button {
+.user-button-2 {
   background-color: #4AD6D9;
 }
 
-.user-button-wrapper:nth-child(3) .user-button {
+.user-button-3 {
   background-color: #FF7394;
 }
 
-.user-button-wrapper:nth-child(4) .user-button {
+.user-button-4 {
   background-color: #7DDEAB;
 }
 
@@ -157,25 +157,25 @@ tbody td {
 
 /* ユーザーID 1のスケジュール用の色 */
 .user-color-1 {
-  background-color: #ffcccc;
-  /* 赤色のシェード */
+  background-color: #FFD66E;
+  /* 黄色のシェード */
 }
 
 /* ユーザーID 2のスケジュール用の色 */
 .user-color-2 {
-  background-color: #ccffcc;
-  /* 緑色のシェード */
+  background-color: #4AD6D9;
+  /* 青色のシェード */
 }
 
 /* ユーザーID 3のスケジュール用の色 */
 .user-color-3 {
-  background-color: #ccccff;
-  /* 青色のシェード */
+  background-color: #FF7394;
+  /* 赤色のシェード */
 }
 
 .user-color-4 {
-  background-color: #ffe5cc;
-  /* オレンジのシェード */
+  background-color: #7DDEAB;
+  /* 緑色のシェード */
 }
 
 /* 以下、必要に応じて他のユーザーIDに対する色を追加 */
