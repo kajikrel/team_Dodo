@@ -35,12 +35,29 @@ main {
   margin: 0 auto;
 }
 
+/* ヘッダー */
+header {
+  padding: 16px 0 16px 32px;
+  background-color: #FFF;
+  border-bottom: 1px solid #333;
+}
+
+h1 {
+  font-size: 15px;
+}
+
+.subtitle {
+  padding-left: 8px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
 /* 名前などを入力するエリア */
 .input-area {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 36px 0;
+  padding: 70px 0 44px;
 }
 
 .form-wrapper {
@@ -105,15 +122,11 @@ main {
   background-color: #7DDEAB;
 }
 
-.day {
-  font-size: 12px;
-}
-
 /* スケジュールエリア */
 .schedule-display-area {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
-  padding: 50px 30px 60px;
+  padding: 30px 0 30px;
   background-color: #FFF;
   border: 1px solid #333;
   border-radius: 30px;
@@ -123,26 +136,70 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
   margin: 0 auto;
-  width: 840px;
+  width: 900px;
 }
 
 thead th {
-  padding-bottom: 6px;
+  padding-bottom: 8px;
   user-select: none;
+}
+
+tbody tr {
+  position: relative;
+}
+
+[data-date$="24"] {
+  display: none;
+}
+
+.time-24 {
+  transform: translateY(7px);
 }
 
 tbody th {
-  width: 24px;
-  height: 36px;
+  width: 22px;
   user-select: none;
+  font-size: 12px;
+  position: relative;
+  top: -16px;
 }
 
 tbody td {
-  cursor: pointer;
   border: 1px solid;
   user-select: none;
   width: 100px;
+  height: 28px;
+}
+
+.day {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.time-24 {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* user_page */
+.input-area-user-page {
+  padding: 70px 0 16px;
+  justify-content: end;
+}
+
+.save-button {
+  width: 120px;
   height: 50px;
+  border-radius: 24px;
+  background-color: #DEC9BD;
+  border: 1px solid #333;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+.draggable-date-section-user-page {
+  cursor: pointer;
 }
 
 .is-free {
@@ -152,8 +209,6 @@ tbody td {
 .hidden {
   display: none;
 }
-
-/* index.css */
 
 /* ユーザーID 1のスケジュール用の色 */
 .user-color-1 {
