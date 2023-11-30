@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>スケミ</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <div id="wrapper">
@@ -14,14 +14,8 @@
   </header>
   <main>
     <input type="date" id="base-date">
-    <form action="" id="user-form">
-      <input type="text" name="user-name" id="user-name" placeholder="ニックネーム">
-      <input type="submit" value="決定">
-    </form>
-    <div>
-      <button data-userid="1" class="user-button" style="background: yellow; cursor: pointer">原田</button>
-      <button data-userid="2" class="user-button" style="background: skyblue; cursor: pointer">梶原</button>
-    </div>
+    
+    
     <table>
       <thead>
         <tr>
@@ -32,10 +26,9 @@
       </thead>
         <tbody id='draggable-date-section'>
 
-          <!-- ここに、スケジュール入力用セルを入れていく -->
         </tbody>
     </table>
-    <form action="" id="save-form">
+    <form action="http://localhost:8000/save" id="save-form">
       <input type="submit" value="保存" id="save-button">
     </form>
   </main>
@@ -43,5 +36,7 @@
   <script type="module" src="/js/index.js"></script>
     <script type="module" src="/js/putSchedule.js"></script>
   <script type="module" src="/js/button.js"></script>
+    
+
 </body>
 </html>

@@ -1,16 +1,17 @@
-// スケジュールテーブルを生成する機能
+// 選択された日付を取得して1週間分表示する機能
 
 // DOM 取得
-const baseDateInput = document.getElementById('base-date');
-const datesParent = document.querySelector('thead tr');
+const baseDateInput = document.getElementById("base-date");
+const datesParent = document.querySelector("thead tr");
+const draggableDateSectionElement = document.getElementById("draggable-date-section");
 
 // 曜日名
-const dayOfWeek = ['日', '月', '火', '水', '木', '金', '土'];
+const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
 
-// 日付が選択されたら、 th の日付を更新 & td の data-date を更新
-baseDateInput.addEventListener('input', () => {
+// 日付が選択されたときのイベント
+baseDateInput.addEventListener("input", () => {
   const baseDate = new Date(baseDateInput.value);
-  const dates = document.querySelectorAll('.date');
+  const dates = document.querySelectorAll(".date");
   dates.forEach((date) => {
     date.remove();
   });
@@ -18,7 +19,7 @@ baseDateInput.addEventListener('input', () => {
   renderDraggableTableData(baseDate);
 });
 
-// th に日付を1週間分表示する関数
+// 日付を1週間分表示する関数
 const renderDates = (baseDate) => {
   for (let i = 0; i < 7; i++) {
     const currentDay = new Date(baseDate); // ベースの日付をコピー
@@ -28,16 +29,15 @@ const renderDates = (baseDate) => {
     const date = currentDay.getDate(); // 日
     const day = dayOfWeek[currentDay.getDay()]; // 曜日
 
-    const date_th = document.createElement('th');
+    const date_th = document.createElement("th");
     date_th.textContent = `${month}/${date}(${day})`;
-    date_th.classList.add('date');
+    date_th.classList.add("date");
     datesParent.appendChild(date_th);
   }
 };
 
-// スケジュールテーブルを生成する関数
 const renderDraggableTableData = (baseDate) => {
-  const padToTwoDigits = (number) => number.toString().padStart(2, '0');
+  const padToTwoDigits = (number) => number.toString().padStart(2, "0");
 
   // 日付をYYYY-MM-DD形式で取得する関数
   const getFormattedDate = (date) => {
@@ -48,8 +48,8 @@ const renderDraggableTableData = (baseDate) => {
   };
 
   // ES6でテーブルを生成するための関数
-  const createTable = () => {
-    let table = '<table>';
+  const createTable = (startDate) => {
+    let table = "<table>";
     for (let hour = 9; hour <= 16; hour++) {
       table += `<tr>`;
       table += `<th>${padToTwoDigits(hour)}:00</th>`; // 時間を2桁表示
@@ -59,14 +59,12 @@ const renderDraggableTableData = (baseDate) => {
         date.setDate(date.getDate() + dayOffset);
         const formattedDate = getFormattedDate(date);
         // data-date属性にYYYY-MM-DD-HH形式で設定
-        table += `<td data-date="${formattedDate}-${padToTwoDigits(
-          hour
-        )}"></td>`;
+        table += `<td data-date="${formattedDate}-${padToTwoDigits(hour)}"></td>`;
       }
       table += `</tr>`;
     }
-    table += '</table>';
-    document.getElementById('draggable-date-section').innerHTML = table;
+    table += "</table>";
+    document.getElementById("draggable-date-section").innerHTML = table;
   };
 
   createTable(baseDate);

@@ -60,10 +60,9 @@ tbody td {
   user-select: none;
 }
 
-/* スケジュールセル */
-/* .is-free {
+.is-free {
   background: red;
-}  */
+}  
 
 .yellow {
   background: yellow;

@@ -2,6 +2,7 @@ require 'webrick'
 require 'mysql2'
 require 'uri'
 require 'erb'
+require 'json'
 
 sleep 5
 
@@ -113,6 +114,34 @@ server.mount_proc '/user/' do |req, res|
 end
 
 #ここまでユーザーボタンの処理
+
+#saveボタンのpost処理　ユーザースケジュール登録
+server.mount_proc '/save' do |req, res|
+  payload = JSON.parse(req.body)
+
+  begin
+    client = Mysql2::Client.new(host: "db", username: "user", password: "userpassword", database: "sukemi")
+    
+    payload["schedules"].each do |schedule| # ここでpayloadのキーを"schedules"に修正
+      date = schedule['date']
+      to_time = schedule['toTime']
+      end_time = schedule['endTime']
+
+      client.query("INSERT INTO schedules (user_id, date, to_time, end_time) VALUES (#{payload["user_id"]}, '#{date}', '#{to_time}', '#{end_time}')")
+    end
+
+    res['Content-Type'] = 'application/json'
+    res.body = { message: "Schedule saved successfully" }.to_json
+  rescue Mysql2::Error => e
+    puts "An error occurred: #{e.message}"
+    res['Content-Type'] = 'application/json'
+    res.status = 500
+    res.body = { error: e.message }.to_json
+  ensure
+    client&.close
+  end
+end
+
 
 
 
