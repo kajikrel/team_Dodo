@@ -30,27 +30,30 @@ document.addEventListener('DOMContentLoaded', () => {
       method: 'POST',
       body: formData
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data); 
-      alert(data.message); // 成功した場合のメッセージをアラート表示
-      if (data.user_id && data.user_name) { // データの検証
-        addUserToList(data.user_id, data.user_name); // 新しいユーザーをリストに追加する関数を呼び出し
-      } else {
-        console.error('ユーザーIDまたはユーザー名が定義されていません。');
-      }
-    })
-    
-    .catch(error => {
-      alert('エラーが発生しました: ' + error); // エラーをアラート表示
-    });
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        alert(data.message); // 成功した場合のメッセージをアラート表示
+        if (data.user_id && data.user_name) { // データの検証
+          addUserToList(data.user_id, data.user_name); // 新しいユーザーをリストに追加する関数を呼び出し
+        } else {
+          console.error('ユーザーIDまたはユーザー名が定義されていません。');
+        }
+      })
+
+      .catch(error => {
+        alert('エラーが発生しました: ' + error); // エラーをアラート表示
+      });
   });
 });
 
 // 新しいユーザーをリストに追加する関数
 function addUserToList(userId, userName) {
-  const usersDiv = document.getElementById('users');
-  const newUserParagraph = document.createElement('p');
-  newUserParagraph.innerHTML = `${userName} <a href="/user/${userId}">Click Me</a>`;
-  usersDiv.appendChild(newUserParagraph);
+  // const usersDiv = document.getElementById('users');
+  // const newUserParagraph = document.createElement('p');
+  // newUserParagraph.innerHTML = `${userName} <a href="/user/${userId}">Click Me</a>`;
+  // usersDiv.appendChild(newUserParagraph);
+  const target = document.querySelector('.user-button-wrapper:first-child .user-button');
+  target.textContent = `${userName}`;
+  target.href = `/user/${userId}`
 }

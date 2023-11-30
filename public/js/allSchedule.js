@@ -10,7 +10,7 @@ const datesParent = document.querySelector("thead tr");
 const draggableDateSectionElement = document.getElementById("draggable-date-section");
 
 // 曜日名
-const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
+const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 // 日付が選択されたときのイベント
 baseDateInput.addEventListener("input", () => {
@@ -34,7 +34,7 @@ const renderDates = (baseDate) => {
     const day = dayOfWeek[currentDay.getDay()]; // 曜日
 
     const date_th = document.createElement("th");
-    date_th.textContent = `${month}/${date}(${day})`;
+    date_th.innerHTML = `<div>${month}/${date}<div><div class="day">${day}</div>`;
     date_th.classList.add("date");
     datesParent.appendChild(date_th);
   }
@@ -94,15 +94,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const endTime = schedule.end_time.substr(0, 5); // 形式は "HH:MM"
         const userId = schedule.user_id;
 
-       
-        
+
+
         // CSSクラス名をユーザーIDに基づいて決定
         const colorClass = `user-color-${userId}`;
-        
+
         // 対象のセルを特定
         const cellSelector = `td[data-date="${scheduleDate}-${startTime}"]`;
         const cell = document.querySelector(cellSelector);
-        
+
         // セルが存在する場合は色をつける
         if (cell) {
           cell.classList.add(colorClass);

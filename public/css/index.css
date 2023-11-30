@@ -9,10 +9,10 @@ p {
   margin: 0;
 }
 
-/* a {
+a {
   color: inherit;
   text-decoration: 0;
-} */
+}
 
 button {
   padding: 0;
@@ -80,10 +80,6 @@ main {
   gap: 18px;
 }
 
-.user-button-wrapper {
-  position: relative;
-}
-
 .user-button {
   width: 74px;
   height: 44px;
@@ -107,13 +103,6 @@ main {
 
 .user-button-wrapper:nth-child(4) .user-button {
   background-color: #7DDEAB;
-}
-
-.delete-button {
-  position: absolute;
-  right: 0;
-  color: #666;
-  cursor: pointer;
 }
 
 .day {
@@ -143,22 +132,9 @@ thead th {
 }
 
 tbody th {
-  position: relative;
   width: 24px;
   height: 36px;
   user-select: none;
-}
-
-/* 仮 */
-.hour {
-  position: absolute;
-  font-size: 14px;
-  top: -7px;
-  line-height: 1rem;
-}
-
-.hour-last {
-  top: 29px;
 }
 
 tbody td {
@@ -169,50 +145,37 @@ tbody td {
   height: 50px;
 }
 
-.yellow {
-  background: yellow;
+.is-free {
+  background: red;
 }
 
-.skyblue {
-  background: skyblue;
+.hidden {
+  display: none;
 }
-
-.container-cell {
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
-}
-
-.user1-cell {
-  flex: 1;
-  background: yellow;
-}
-
-.user2-cell {
-  flex: 1;
-  background: skyblue;
-}
-
 
 /* index.css */
 
 /* ユーザーID 1のスケジュール用の色 */
 .user-color-1 {
-  background-color: #ffcccc; /* 赤色のシェード */
+  background-color: #ffcccc;
+  /* 赤色のシェード */
 }
 
 /* ユーザーID 2のスケジュール用の色 */
 .user-color-2 {
-  background-color: #ccffcc; /* 緑色のシェード */
+  background-color: #ccffcc;
+  /* 緑色のシェード */
 }
 
 /* ユーザーID 3のスケジュール用の色 */
 .user-color-3 {
-  background-color: #ccccff; /* 青色のシェード */
+  background-color: #ccccff;
+  /* 青色のシェード */
 }
 
 .user-color-4 {
-  background-color: #ffe5cc; /* オレンジのシェード */
+  background-color: #ffe5cc;
+  /* オレンジのシェード */
 }
 
 /* 以下、必要に応じて他のユーザーIDに対する色を追加 */

@@ -3,70 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>スケミ</title>
+  <title>スケミ -軽い・はやい・簡単なスケジュールアプリ-</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kosugi&family=Roboto:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-  <div id="wrapper">
   <header>
     <h1>スケミ</h1>
-    <div id="user-name-block"></div>
   </header>
   <main>
-    <input type="date" id="base-date">
-    <form action="http://localhost:8000/submit" method="post" id="user-form">
-      <input type="text" name="user-name" id="user-name" placeholder="ニックネームをいれて">
-      <input type="submit" value="決定">
-  </form>
-
-  <!-- HTMLファイルの適切な場所にこの要素を追加 -->
-<div id="schedules-container"></div>
-
-
-  <!-- ユーザー名とボタンを表示するセクション　※ボタンをクリックしたときに -->
-  <div id="users">
-     <% user_names.each_with_index do |name, index| %>
-        <%# <form action="/user/<%= user_ids[index] " method="get"> %>
-          <p>
-            <%= name %>
-            <a href="/user/<%= user_ids[index] %>">Click Me</a>
-          </p>
-        <%# </form> %>
-      <% end %>
-   </div>
-
-   
-
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      border: 1px solid #000;
-      padding: 5px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #ddd;
-    }
-  </style>
-</head>
-<body>
-  <table>
-    <thead>
-      <tr>
-        <th></th> <!-- 時間枠のための空のヘッダ -->
-        
-      </tr>
-    </thead>
-     <tbody id='draggable-date-section'>
+    <div class="input-area">
+      <form action="http://localhost:8000/submit" method="post" id="user-form" class="form-wrapper">
+        <label for="user-name" class="input-label">ニックネームを入力：</label>
+        <input type="text" name="user-name" id="user-name" class="input" placeholder="ニックネーム">
+        <input type="submit" value="追加する" class="add-button">
+      </form>
+      <form action="" id="date-form" class="form-wrapper">
+        <label for="base-date" class="input-label">開始日を選択：</label>
+        <input type="date" id="base-date" class="input">
+      </form>
+      <div class="user-button-container">
+        <div class="user-button-wrapper">
+          <a href="/user/<%= user_ids[0] %>" class="user-button"><%=  user_names[0] %></a>
+        </div>
+        <div class="user-button-wrapper">
+          <a href="/user/<%= user_ids[1] %>" class="user-button"><%=  user_names[1] %></a>
+        </div>
+        <div class="user-button-wrapper">
+          <a href="/user/<%= user_ids[2] %>" class="user-button"><%=  user_names[2] %></a>
+        </div>
+        <div class="user-button-wrapper">
+          <a href="/user/<%= user_ids[3] %>" class="user-button"><%=  user_names[3] %></a>
+        </div>
+        <p class="input-label">スケジュールを入力：</p>
+      </div>
+    </div>
+    <div class="schedule-display-area">
+      <table>
+        <thead>
+          <tr>
+            <!-- 空白のセルを1つ用意 -->
+            <th></th>
+            <!-- ここに、選択された日付から1週間分の th を入れていく -->
+          </tr>
+        </thead>
+          <tbody id='draggable-date-section'>
             <!-- ここに、スケジュール入力用セルを入れていく -->
           </tbody>
-  </table>
+      </table>
+    </div>
   </main>
-  </div>
   <script type="module" src="js/index.js"></script>
   <script type="module" src="js/allSchedule.js"></script>
 </body>
