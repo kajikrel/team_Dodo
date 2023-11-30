@@ -43,4 +43,10 @@ docker-compose down
 
 What men???
 
-mysql -u root -proot test --default-character-set=utf8 < hogehoge.sql
+mysql -u root -proot test --default-character-set=utf8
+
+> SELECT \* FROM schedules;
+
+SET NAMES utf8;
+
+TRUNCATE TABLE users;

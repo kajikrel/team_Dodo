@@ -112,6 +112,7 @@ saveButton.addEventListener("click", (event) => {
     }
   }).then(data => {
     console.log("スケジュールが保存されました", data); // 保存成功のメッセージと共にサーバーからのレスポンスを出力
+    window.location.href = '/'; // ここでルートURLにリダイレクトする
   }).catch(error => {
     console.error("エラーが発生しました", error);
   });

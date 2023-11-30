@@ -68,17 +68,21 @@ client = Mysql2::Client.new(
 
 query = "INSERT INTO users (user_name) VALUES ('#{user_name}')"
 client.query(query)
+result = client.query("SELECT LAST_INSERT_ID() AS last_id")
+user_id = result.first['last_id']
 
-    # 成功メッセージを設定
-    res['Content-Type'] = 'text/html; charset=utf-8'
-    res.body = "ユーザー名 #{user_name} が保存されました。"
-  rescue Mysql2::Error => e
-    res['Content-Type'] = 'text/html; charset=utf-8'
-    res.body = "Error occurred: #{e.message}"
-  ensure
-    client&.close
-  end
-end
+
+     # JSON形式でレスポンスを返す
+     res['Content-Type'] = 'application/json'
+     res.body = { message: "ユーザー名 #{user_name} が保存されました。", user_id: user_id, user_name: user_name }.to_json
+   rescue Mysql2::Error => e
+     res['Content-Type'] = 'application/json'
+     res.status = 500
+     res.body = { error: "Error occurred: #{e.message}" }.to_json
+   ensure
+     client&.close
+   end
+ end
 
 # ここまでが送信ボタンの処理
 
@@ -121,6 +125,9 @@ server.mount_proc '/save' do |req, res|
 
   begin
     client = Mysql2::Client.new(host: "db", username: "user", password: "userpassword", database: "sukemi")
+
+    # まずユーザーの既存スケジュールを削除する
+    client.query("DELETE FROM schedules WHERE user_id = #{payload['user_id']}")
     
     payload["schedules"].each do |schedule| # ここでpayloadのキーを"schedules"に修正
       date = schedule['date']
@@ -141,6 +148,37 @@ server.mount_proc '/save' do |req, res|
     client&.close
   end
 end
+
+#mainページにスケジュールを表示させるためのエンドポイント
+server.mount_proc '/schedules' do |req, res|
+  begin
+    client = Mysql2::Client.new(host: "db", username: "user", password: "userpassword", database: "sukemi")
+    schedules = client.query("SELECT * FROM schedules")
+
+    schedules_data = schedules.map do |schedule|
+      {
+        user_id: schedule['user_id'], 
+        date: schedule['date'], 
+        to_time: schedule['to_time'].strftime('%H:%M:%S'),
+        end_time: schedule['end_time'].strftime('%H:%M:%S') 
+      }
+    end
+
+    res.content_type = 'application/json'
+    res.body = schedules_data.to_json
+  rescue Mysql2::Error => e
+    puts "An error occurred: #{e.message}"
+    res.status = 500
+    res.content_type = 'application/json'
+    res.body = { error: e.message }.to_json
+  ensure
+    client&.close
+  end
+end
+
+
+
+
 
 
 

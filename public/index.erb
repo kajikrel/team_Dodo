@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>スケミ</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
   <div id="wrapper">
@@ -19,6 +19,10 @@
       <input type="submit" value="決定">
   </form>
 
+  <!-- HTMLファイルの適切な場所にこの要素を追加 -->
+<div id="schedules-container"></div>
+
+
   <!-- ユーザー名とボタンを表示するセクション　※ボタンをクリックしたときに -->
   <div id="users">
      <% user_names.each_with_index do |name, index| %>
@@ -30,6 +34,8 @@
         <%# </form> %>
       <% end %>
    </div>
+
+   
 
   <style>
     table {
@@ -52,25 +58,17 @@
     <thead>
       <tr>
         <th></th> <!-- 時間枠のための空のヘッダ -->
-        <% (Date.today..Date.today+6).each do |date| %>
-          <th><%= date.strftime('%m/%d(%a)') %></th>
-        <% end %>
+        
       </tr>
     </thead>
-    <tbody>
-      <% (9..16).each do |hour| %>
-        <tr>
-          <th><%= '%02d' % hour %></th> <!-- 時間を2桁表示 -->
-          <% (Date.today..Date.today+6).each do |date| %>
-            <td data-date="<%= date %>" data-hour="<%= hour %>"></td>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
+     <tbody id='draggable-date-section'>
+            <!-- ここに、スケジュール入力用セルを入れていく -->
+          </tbody>
   </table>
   </main>
   </div>
   <script type="module" src="js/index.js"></script>
+  <script type="module" src="js/allSchedule.js"></script>
 </body>
 </html>
 
