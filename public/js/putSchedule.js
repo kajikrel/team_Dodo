@@ -8,7 +8,6 @@ const schedules = document.querySelectorAll("tbody td");
 let isMouseDown = false;
 let selectingDates = [];
 
-// 選択された日付を取得して1週間分表示する機能
 
 // DOM 取得
 const baseDateInput = document.getElementById("base-date");

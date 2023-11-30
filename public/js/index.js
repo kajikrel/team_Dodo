@@ -47,10 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// 新しいユーザーをリストに追加する関数
+// // 新しいユーザーをリストに追加する関数
 function addUserToList(userId, userName) {
   const usersDiv = document.getElementById('users');
   const newUserParagraph = document.createElement('p');
   newUserParagraph.innerHTML = `${userName} <a href="/user/${userId}">Click Me</a>`;
   usersDiv.appendChild(newUserParagraph);
 }
+

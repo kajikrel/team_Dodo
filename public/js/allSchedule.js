@@ -16,6 +16,11 @@ const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
 baseDateInput.addEventListener("input", () => {
   const baseDate = new Date(baseDateInput.value);
   const dates = document.querySelectorAll(".date");
+
+   // ローカルストレージに日付を保存
+  const selectedDate = baseDateInput.value;
+  localStorage.setItem('selectedDate', selectedDate);
+  
   dates.forEach((date) => {
     date.remove();
   });
