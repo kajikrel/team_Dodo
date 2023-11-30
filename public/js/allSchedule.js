@@ -54,9 +54,9 @@ const renderDraggableTableData = (baseDate) => {
   // ES6でテーブルを生成するための関数
   const createTable = (startDate) => {
     let table = "<table>";
-    for (let hour = 9; hour <= 16; hour++) {
+    for (let hour = 7; hour <= 23; hour++) {
       table += `<tr>`;
-      table += `<th>${padToTwoDigits(hour)}:00</th>`; // 時間を2桁表示
+      table += `<th>${padToTwoDigits(hour)}</th>`; // 時間を2桁表示
       for (let dayOffset = 0; dayOffset <= 6; dayOffset++) {
         // 基点の日付からdayOffset日数だけ離れた日付を計算
         const date = new Date(baseDate); // 新しい Date オブジェクトを作成して baseDate をコピー
