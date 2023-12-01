@@ -44,5 +44,3 @@ docker-compose down
 SELECT \* FROM schedules;
 
 SET NAMES utf8;
-
-TRUNCATE TABLE users;
