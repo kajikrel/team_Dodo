@@ -1,0 +1,236 @@
+@charset "utf-8";
+
+/* リセット */
+body,
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: 0;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  background-color: inherit;
+}
+
+/* 全体 */
+body {
+  font-family: 'Kosugi', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #F3F1ED;
+  color: #333;
+  letter-spacing: 0.07em;
+}
+
+main {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+/* ヘッダー */
+header {
+  padding: 16px 0 16px 32px;
+  background-color: #FFF;
+  border-bottom: 1px solid #333;
+}
+
+h1 {
+  font-size: 15px;
+}
+
+.subtitle {
+  padding-left: 8px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* 名前などを入力するエリア */
+.input-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 70px 0 44px;
+}
+
+.form-wrapper {
+  position: relative;
+}
+
+.input-label {
+  position: absolute;
+  font-size: 12px;
+  top: -18px;
+}
+
+.input {
+  width: 170px;
+  padding: 8px;
+  border-radius: 24px;
+  border: 1px solid #333;
+}
+
+.add-button {
+  background-color: #DEC9BD;
+  border: 1px solid #333;
+  border-radius: 16px;
+  font-size: 13px;
+  padding: 4px 14px;
+  cursor: pointer;
+}
+
+.user-button {
+  display: block;
+  font-size: 14px;
+}
+
+.user-button-container {
+  display: flex;
+  position: relative;
+  gap: 18px;
+}
+
+.user-button {
+  width: 74px;
+  height: 44px;
+  border-radius: 24px;
+  border: 1px solid #333;
+  text-align: center;
+  line-height: 44px;
+}
+
+.user-button-1 {
+  background-color: #FFD66E;
+}
+
+.user-button-2 {
+  background-color: #4AD6D9;
+}
+
+.user-button-3 {
+  background-color: #FF7394;
+}
+
+.user-button-4 {
+  background-color: #7DDEAB;
+}
+
+/* スケジュールエリア */
+.schedule-display-area {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  padding: 30px 0 30px;
+  background-color: #FFF;
+  border: 1px solid #333;
+  border-radius: 30px;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0 auto;
+  width: 900px;
+}
+
+thead th {
+  padding-bottom: 8px;
+  user-select: none;
+}
+
+tbody tr {
+  position: relative;
+}
+
+[data-date$="24"] {
+  display: none;
+}
+
+.time-24 {
+  transform: translateY(7px);
+}
+
+tbody th {
+  width: 22px;
+  user-select: none;
+  font-size: 12px;
+  position: relative;
+  top: -16px;
+}
+
+tbody td {
+  border: 1px solid;
+  user-select: none;
+  width: 100px;
+  height: 28px;
+}
+
+.day {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.time-24 {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* user_page */
+.input-area-user-page {
+  padding: 70px 0 16px;
+  justify-content: end;
+}
+
+.save-button {
+  width: 120px;
+  height: 50px;
+  border-radius: 24px;
+  background-color: #DEC9BD;
+  border: 1px solid #333;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+.draggable-date-section-user-page {
+  cursor: pointer;
+}
+
+.is-free {
+  background: red;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ユーザーID 1のスケジュール用の色 */
+.user-color-1 {
+  background-color: #FFD66E;
+  /* 黄色のシェード */
+}
+
+/* ユーザーID 2のスケジュール用の色 */
+.user-color-2 {
+  background-color: #4AD6D9;
+  /* 青色のシェード */
+}
+
+/* ユーザーID 3のスケジュール用の色 */
+.user-color-3 {
+  background-color: #FF7394;
+  /* 赤色のシェード */
+}
+
+.user-color-4 {
+  background-color: #7DDEAB;
+  /* 緑色のシェード */
+}
+
+/* 以下、必要に応じて他のユーザーIDに対する色を追加 */

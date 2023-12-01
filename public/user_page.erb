@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スケミ ユーザーページ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kosugi&family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+  <header>
+    <h1>スケミ<span class="subtitle">-軽い！速い！簡単！なスケジュールアプリ-</span></h1>
+  </header>
+  <main>
+    <input type="date" id="base-date" class="hidden">
+    <div class="input-area input-area-user-page">
+      <form action="http://localhost:8000/save" id="save-form">
+        <input type="submit" value="保存" id="save-button" class="save-button">
+      </form>
+    </div>
+    <div class="schedule-display-area">
+      <table>
+        <thead>
+          <tr>
+            <!-- 空白のセルを1つ用意 -->
+            <th></th>
+            <!-- ここに、選択された日付から1週間分の th を入れていく -->
+          </tr>
+        </thead>
+          <tbody id='draggable-date-section' class="draggable-date-section-user-page">
+            <!-- ここに、スケジュール入力用セルを入れていく -->
+          </tbody>
+      </table>
+    </div>
+  </main>
+  <script type="module" src="/js/user_page.js"></script>
+  <script type="module" src="/js/putSchedule.js"></script>
+</body>
+</html>
