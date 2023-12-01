@@ -52,8 +52,6 @@ server.mount_proc '/' do |req, res|
   res['Content-Type'] = 'text/html; charset=utf-8'
 end
 
-#ここまでがルートのコーディング
-
 # 送信ボタンを押したときの処理
 server.mount_proc '/submit' do |req, res|
   begin
@@ -185,6 +183,3 @@ end
 
 trap 'INT' do server.shutdown end
 server.start
-
-
-
