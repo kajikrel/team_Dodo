@@ -93,6 +93,8 @@ saveButton.addEventListener("click", (event) => {
 
   // AJAXリクエストを作成して送信
   const userId = window.location.pathname.split('/').pop();
+  const selectedDate = localStorage.getItem('selectedDate'); // ローカルストレージから選択された日付を取得
+
 
   fetch("/save", {
     method: "POST",
@@ -111,6 +113,7 @@ saveButton.addEventListener("click", (event) => {
     }
   }).then(data => {
     console.log("スケジュールが保存されました", data); // 保存成功のメッセージと共にサーバーからのレスポンスを出力
+    localStorage.setItem('selectedDate', selectedDate); 
     window.location.href = '/'; // ここでルートURLにリダイレクトする
   }).catch(error => {
     console.error("エラーが発生しました", error);

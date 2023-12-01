@@ -24,8 +24,7 @@ baseDateInput.addEventListener("input", () => {
   dates.forEach((date) => {
     date.remove();
   });
-  renderDates(baseDate);
-  renderDraggableTableData(baseDate);
+  
 });
 
 // 日付を1週間分表示する関数
