@@ -6,7 +6,7 @@ const datesParent = document.querySelector("thead tr");
 const draggableDateSectionElement = document.getElementById("draggable-date-section");
 
 // 曜日名
-const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"];
+const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 
 
@@ -33,7 +33,7 @@ const renderDates = (baseDate) => {
     const day = dayOfWeek[currentDay.getDay()]; // 曜日
 
     const date_th = document.createElement("th");
-    date_th.textContent = `${month}/${date}(${day})`;
+    date_th.innerHTML = `<div>${month}/${date}<div><div class="day">${day}</div>`;
     date_th.classList.add("date");
     datesParent.appendChild(date_th);
   }
@@ -53,9 +53,13 @@ const renderDraggableTableData = (baseDate) => {
   // ES6でテーブルを生成するための関数
   const createTable = (startDate) => {
     let table = "<table>";
-    for (let hour = 9; hour <= 16; hour++) {
+    for (let hour = 7; hour <= 24; hour++) {
       table += `<tr>`;
-      table += `<th>${padToTwoDigits(hour)}:00</th>`; // 時間を2桁表示
+      if (hour === 24) {
+        table += `<th class="time-24">${padToTwoDigits(hour)}</th>`; // 時間を2桁表示
+      } else {
+        table += `<th>${padToTwoDigits(hour)}</th>`; // 時間を2桁表示
+      }
       for (let dayOffset = 0; dayOffset <= 6; dayOffset++) {
         // 基点の日付からdayOffset日数だけ離れた日付を計算
         const date = new Date(baseDate); // 新しい Date オブジェクトを作成して baseDate をコピー

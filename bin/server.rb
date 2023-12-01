@@ -33,9 +33,12 @@ server.mount_proc '/' do |req, res|
     client = Mysql2::Client.new(host: "db", username: "user", password: "userpassword", database: "sukemi")
     user_info = client.query("SELECT user_id, user_name FROM users")
 
-    # ユーザー名を配列に格納
-    user_ids = user_info.map { |row| row['user_id'] }
-    user_names = user_info.map { |row| row['user_name'] }
+  # ユーザーIDで昇順にソート
+  sorted_user_info = user_info.to_a.sort_by { |row| row['user_id'] }
+
+  # ユーザー名を配列に格納
+  user_ids = sorted_user_info.map { |row| row['user_id'] }
+  user_names = sorted_user_info.map { |row| row['user_name'] }
 
   rescue Mysql2::Error => e
     puts "An error occurred: #{e.message}"
