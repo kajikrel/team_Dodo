@@ -37,19 +37,28 @@ main {
 
 /* ヘッダー */
 header {
-  padding: 16px 0 16px 32px;
-  background-color: #FFF;
-  border-bottom: 1px solid #333;
+  padding: 16px 44px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 h1 {
-  font-size: 15px;
+  font-family: 'Monomaniac One', sans-serif;
+  font-size: 30px;
+  position: relative;
+  top: -4px;
 }
 
 .subtitle {
-  padding-left: 8px;
+  font-family: 'Kosugi', sans-serif;
   font-size: 12px;
   font-weight: 400;
+}
+
+.title-logo {
+  width: 55px;
+  height: 50px;
 }
 
 /* 名前などを入力するエリア */
@@ -57,7 +66,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 70px 0 44px;
+  padding: 36px 0 44px;
 }
 
 .form-wrapper {
@@ -191,6 +200,29 @@ tbody td {
 .time-24 {
   font-size: 12px;
   font-weight: bold;
+}
+
+/* フッター */
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  margin: 0 auto;
+}
+
+footer p {
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+.team-logo {
+  width: 26px;
+  height: 26px;
 }
 
 /* user_page */
