@@ -5,21 +5,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // ローカルストレージから日付を取得し、なければ今日の日付を使用
   const storedDate = localStorage.getItem('selectedDate');
   const baseDate = storedDate ? new Date(storedDate) : new Date();
-  
+
   const today = new Date();
   const datesParent = document.querySelector("thead tr");
   const draggableDateSectionElement = document.getElementById("draggable-date-section");
   const userForm = document.getElementById('user-form');
   const baseDateInput = document.getElementById("base-date");
 
-  
+
 
   // DOM要素が存在することを確認
   if (datesParent && draggableDateSectionElement && userForm && baseDateInput) {
     renderDates(today, datesParent);
     renderDraggableTableData(today, draggableDateSectionElement);
 
-    
+
 
     // ユーザーフォームの送信イベント
     userForm.addEventListener('submit', (event) => {
@@ -29,29 +29,29 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData();
       formData.append('user-name', userName);
 
-       // ユーザー名が空の場合はアラートを表示して処理を中断
-  if (!userName) {
-    alert('名前を入力してください。');
-    return;
-  }
+      // ユーザー名が空の場合はアラートを表示して処理を中断
+      if (!userName) {
+        alert('名前を入力してください。');
+        return;
+      }
 
       fetch('/submit', {
         method: 'POST',
         body: formData
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data); 
-        alert(data.message); // 成功した場合のメッセージをアラート表示
-        if (data.user_id && data.user_name) { // データの検証
-          addUserNameToButton(data.user_id, data.user_name); // 新しいユーザーをリストに追加する関数を呼び出し
-        } else {
-          console.error('ユーザーIDまたはユーザー名が定義されていません。');
-        }
-      })
-      .catch(error => {
-        alert('エラーが発生しました: ' + error); // エラーをアラート表示
-      });
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          alert(data.message); // 成功した場合のメッセージをアラート表示
+          if (data.user_id && data.user_name) { // データの検証
+            addUserNameToButton(data.user_id, data.user_name); // 新しいユーザーをリストに追加する関数を呼び出し
+          } else {
+            console.error('ユーザーIDまたはユーザー名が定義されていません。');
+          }
+        })
+        .catch(error => {
+          alert('エラーが発生しました: ' + error); // エラーをアラート表示
+        });
     });
 
     // 日付入力イベント
@@ -63,6 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     console.error('Some required elements were not found!');
   }
+
+  // テーブル生成後、各セルを分割しておく
+  divideCell();
 });
 
 
@@ -88,11 +91,26 @@ function addUserNameToButton(userId, userName) {
       console.error(`ボタンのIDが見つかりません！ user ID: ${userId}`);
       return; // ここで処理を終了させます
   }
-  
+
   if (target) {
     target.textContent = userName;
     target.href = `/user/${userId}`;
   } else {
     console.error(`Element for user ID ${userId} not found`);
   }
+}
+
+// セルを分割する関数
+const divideCell = () => {
+  const tds = document.querySelectorAll('tbody td');
+  tds.forEach((td) => {
+    const containerCell = document.createElement('div');
+    containerCell.classList.add("container-cell");
+    for (let i = 0; i < 4; i++) {
+      const userCell = document.createElement('div');
+      userCell.classList.add('user-cell')
+      containerCell.appendChild(userCell);
+    }
+    td.appendChild(containerCell)
+  });
 }

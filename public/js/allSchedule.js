@@ -17,14 +17,14 @@ baseDateInput.addEventListener("input", () => {
   const baseDate = new Date(baseDateInput.value);
   const dates = document.querySelectorAll(".date");
 
-   // ローカルストレージに日付を保存
+  // ローカルストレージに日付を保存
   const selectedDate = baseDateInput.value;
   localStorage.setItem('selectedDate', selectedDate);
-  
+
   dates.forEach((date) => {
     date.remove();
   });
-  
+
 });
 
 // 日付を1週間分表示する関数
@@ -102,18 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const endTime = schedule.end_time.substr(0, 5); // 形式は "HH:MM"
         const userId = schedule.user_id;
 
-
-
-        // CSSクラス名をユーザーIDに基づいて決定
-        const colorClass = `user-color-${userId}`;
-
         // 対象のセルを特定
         const cellSelector = `td[data-date="${scheduleDate}-${startTime}"]`;
         const cell = document.querySelector(cellSelector);
 
         // セルが存在する場合は色をつける
         if (cell) {
-          cell.classList.add(colorClass);
+          cell.firstElementChild.children[userId - 1].classList.add(`user-color-${userId}`);
         }
       });
     });
