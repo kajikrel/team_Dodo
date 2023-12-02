@@ -121,9 +121,7 @@ const displayFreeCell = () => {
   containerCells.forEach((containerCell) => {
     const colors = ['user-color-1', 'user-color-2', 'user-color-3', 'user-color-4'];
     if (colors.every((color, index) => containerCell.children[index].classList.contains(color))) {
-      Array.from(containerCell.children).forEach((elm) => {
-        elm.style.backgroundColor = 'red';
-      });
+      containerCell.classList.add('highlighted'); // 共通のハイライト用クラスを追加
     }
   });
 }
