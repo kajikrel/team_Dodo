@@ -8,7 +8,8 @@ sleep 5
 
 mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
 mime_types.store 'js', 'application/javascript'
-
+mime_types.store 'png', 'image/png'
+mime_types.store 'jpg', 'image/jpeg'
 
 #静的ファイルの読み込みと、serverの設定
 root = File.expand_path '../public', __dir__
@@ -26,6 +27,8 @@ server.mount('/js', WEBrick::HTTPServlet::FileHandler, File.join(root, 'js'))
 
 puts "JavaScript files will be served from: #{File.join(root, 'js')}"
 
+# 画像ファイルに対するリクエストの処理
+server.mount('/images', WEBrick::HTTPServlet::FileHandler, File.join(root, 'images'))
 
 #ここからルートのコーディング
 server.mount_proc '/' do |req, res|
