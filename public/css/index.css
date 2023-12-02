@@ -64,9 +64,9 @@ h1 {
 /* 名前などを入力するエリア */
 .input-area {
   display: flex;
-  align-items: center;
+  height: 120px;
   justify-content: space-between;
-  padding: 36px 0 44px;
+  align-items: center;
 }
 
 .form-wrapper {
@@ -227,7 +227,6 @@ footer p {
 
 /* user_page */
 .input-area-user-page {
-  padding: 70px 0 16px;
   justify-content: end;
 }
 
