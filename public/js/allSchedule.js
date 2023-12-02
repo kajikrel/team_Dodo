@@ -16,11 +16,15 @@ const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 baseDateInput.addEventListener("input", () => {
   const baseDate = new Date(baseDateInput.value);
   const dates = document.querySelectorAll(".date");
+
+   // ローカルストレージに日付を保存
+  const selectedDate = baseDateInput.value;
+  localStorage.setItem('selectedDate', selectedDate);
+  
   dates.forEach((date) => {
     date.remove();
   });
-  renderDates(baseDate);
-  renderDraggableTableData(baseDate);
+  
 });
 
 // 日付を1週間分表示する関数

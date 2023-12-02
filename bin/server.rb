@@ -52,8 +52,6 @@ server.mount_proc '/' do |req, res|
   res['Content-Type'] = 'text/html; charset=utf-8'
 end
 
-#ここまでがルートのコーディング
-
 # 送信ボタンを押したときの処理
 server.mount_proc '/submit' do |req, res|
   begin
@@ -94,8 +92,6 @@ user_id = result.first['last_id']
 server.mount_proc '/user/' do |req, res|
   user_id = req.path_info.split('/').last
 
-  puts "The root is: #{root}"
-
   begin
     client = Mysql2::Client.new(host: "localhost", username: "user", password: "password", database: "sukemi")
     
@@ -103,9 +99,7 @@ server.mount_proc '/user/' do |req, res|
      user = client.query("SELECT user_name FROM users WHERE user_id = #{user_id}").first
 
     
-    # インスタンス変数にユーザー名を格納　ユーザーが該当しなければunknownを返す
-    @user_name = user ? user['user_name'] : "Unknown User"
-    puts "Debug: User name is #{@user_name}"  #
+    
 
   rescue Mysql2::Error => e
     res.body = "An error occurred: #{e.message}"
@@ -189,6 +183,3 @@ end
 
 trap 'INT' do server.shutdown end
 server.start
-
-
-

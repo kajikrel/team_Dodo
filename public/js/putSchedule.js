@@ -8,7 +8,6 @@ const schedules = document.querySelectorAll("tbody td");
 let isMouseDown = false;
 let selectingDates = [];
 
-// 選択された日付を取得して1週間分表示する機能
 
 // DOM 取得
 const baseDateInput = document.getElementById("base-date");
@@ -94,6 +93,8 @@ saveButton.addEventListener("click", (event) => {
 
   // AJAXリクエストを作成して送信
   const userId = window.location.pathname.split('/').pop();
+  const selectedDate = localStorage.getItem('selectedDate'); // ローカルストレージから選択された日付を取得
+
 
   fetch("/save", {
     method: "POST",
@@ -112,6 +113,7 @@ saveButton.addEventListener("click", (event) => {
     }
   }).then(data => {
     console.log("スケジュールが保存されました", data); // 保存成功のメッセージと共にサーバーからのレスポンスを出力
+    localStorage.setItem('selectedDate', selectedDate); 
     window.location.href = '/'; // ここでルートURLにリダイレクトする
   }).catch(error => {
     console.error("エラーが発生しました", error);

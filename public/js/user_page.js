@@ -1,13 +1,14 @@
+// user_page.js
 import { renderDates, renderDraggableTableData } from './renderDates.js';
-// import { addCellStyleByDrag, toggleCellStyleByClick } from "./putSchedule.js";
 
-// 初回アクセス時に表示するのは、アクセスしたその日から1週間分
 document.addEventListener('DOMContentLoaded', () => {
-  const today = new Date();
-  renderDates(today);
-  renderDraggableTableData(today);
+  const saveButton = document.getElementById('save-button');
+  const selectedDateString = localStorage.getItem('selectedDate');
+  const baseDate = selectedDateString ? new Date(selectedDateString) : new Date();
 
-  // ドラッグでスケジュールセルの見た目を変える
-  // addCellStyleByDrag();
-  // toggleCellStyleByClick();
+  // カレンダーの表示更新
+  renderDates(baseDate);
+  renderDraggableTableData(baseDate);
+
 });
+

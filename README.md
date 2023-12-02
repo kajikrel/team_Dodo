@@ -32,7 +32,7 @@ docker exec -it sukemi-db-1 bash
 bash 内で下記コマンドを実行　（パスワード:password）
 
 ```
-mysql -u root -p
+mysql -u root --password=password sukemi --default-character-set=utf8
 ```
 
 4. コンテナ停止
@@ -40,6 +40,7 @@ mysql -u root -p
 ```
 docker-compose down
 ```
+
 
 What men???
 

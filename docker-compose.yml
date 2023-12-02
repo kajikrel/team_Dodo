@@ -19,7 +19,7 @@ services:
       MYSQL_PASSWORD: userpassword # ユーザーのパスワード
       TZ: Asia/Tokyo
     ports:
-      - "3307:3307"
+      - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
       - ./docker-db-init:/docker-entrypoint-initdb.d
