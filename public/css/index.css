@@ -171,6 +171,17 @@ tbody td {
   height: 28px;
 }
 
+/* 分割したセル用 */
+.container-cell {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.user-cell {
+  flex: 1;
+}
+
 .day {
   font-size: 12px;
   margin-top: 2px;
