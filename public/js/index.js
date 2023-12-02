@@ -25,9 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
     userForm.addEventListener('submit', (event) => {
       event.preventDefault(); // フォームのデフォルトの送信を防ぐ
 
-      const userName = document.getElementById('user-name').value;
+      const userName = document.getElementById('user-name').value.trim();
       const formData = new FormData();
       formData.append('user-name', userName);
+
+       // ユーザー名が空の場合はアラートを表示して処理を中断
+  if (!userName) {
+    alert('名前を入力してください。');
+    return;
+  }
 
       fetch('/submit', {
         method: 'POST',
