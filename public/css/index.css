@@ -165,10 +165,11 @@ tbody th {
 }
 
 tbody td {
-  border: 1px solid;
+  border: 1px solid #333;
   user-select: none;
   width: 100px;
   height: 28px;
+  padding: 0;
 }
 
 /* 分割したセル用 */
