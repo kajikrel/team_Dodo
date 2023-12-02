@@ -50,3 +50,5 @@ mysql -u root -proot test --default-character-set=utf8
 SET NAMES utf8;
 
 TRUNCATE TABLE users;
+
+テスト用の変更
