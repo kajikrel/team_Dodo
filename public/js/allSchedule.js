@@ -111,7 +111,20 @@ document.addEventListener('DOMContentLoaded', () => {
           cell.firstElementChild.children[userId - 1].classList.add(`user-color-${userId}`);
         }
       });
+      displayFreeCell();
     });
 });
 
+// 4人とも選択しているセルをハイライト
+const displayFreeCell = () => {
+  const containerCells = document.querySelectorAll('.container-cell');
+  containerCells.forEach((containerCell) => {
+    const colors = ['user-color-1', 'user-color-2', 'user-color-3', 'user-color-4'];
+    if (colors.every((color, index) => containerCell.children[index].classList.contains(color))) {
+      Array.from(containerCell.children).forEach((elm) => {
+        elm.style.backgroundColor = 'red';
+      });
+    }
+  });
+}
 
