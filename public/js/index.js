@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(data); 
         alert(data.message); // 成功した場合のメッセージをアラート表示
         if (data.user_id && data.user_name) { // データの検証
-          addUserToList(data.user_id, data.user_name); // 新しいユーザーをリストに追加する関数を呼び出し
+          addUserNameToButton(data.user_id, data.user_name); // 新しいユーザーをリストに追加する関数を呼び出し
         } else {
           console.error('ユーザーIDまたはユーザー名が定義されていません。');
         }
@@ -59,37 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// #フォームからなまえを保存した後のアラート
-document.addEventListener('DOMContentLoaded', () => {
-  const userForm = document.getElementById('user-form');
 
-  userForm.addEventListener('submit', (event) => {
-    event.preventDefault(); // フォームのデフォルトの送信を防ぐ
-
-    const userName = document.getElementById('user-name').value;
-    const formData = new FormData();
-    formData.append('user-name', userName);
-
-    fetch('/submit', {
-      method: 'POST',
-      body: formData
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        alert(data.message); // 成功した場合のメッセージをアラート表示
-        if (data.user_id && data.user_name) { // データの検証
-          addUserNameToButton(data.user_id, data.user_name); // 新しいユーザーをリストに追加する関数を呼び出し
-        } else {
-          console.error('ユーザーIDまたはユーザー名が定義されていません。');
-        }
-      })
-
-      .catch(error => {
-        alert('エラーが発生しました: ' + error); // エラーをアラート表示
-      });
-  });
-});
 
 // 新しいユーザー名をボタンに表示する関数
 function addUserNameToButton(userId, userName) {
@@ -106,7 +76,17 @@ function addUserNameToButton(userId, userName) {
       break;
     case 4:
       target = document.querySelector('.user-button-4');
+      break;
+    // 必要に応じてその他のケースを追加
+    default:
+      console.error(`ボタンのIDが見つかりません！ user ID: ${userId}`);
+      return; // ここで処理を終了させます
   }
-  target.textContent = `${userName}`;
-  target.href = `/user/${userId}`
+  
+  if (target) {
+    target.textContent = userName;
+    target.href = `/user/${userId}`;
+  } else {
+    console.error(`Element for user ID ${userId} not found`);
+  }
 }
