@@ -167,11 +167,11 @@ tbody tr {
 }
 
 tbody th {
-  width: 22px;
+  width: 18px;
   user-select: none;
   font-size: 12px;
   position: relative;
-  top: -16px;
+  top: -14px;
 }
 
 tbody td {
