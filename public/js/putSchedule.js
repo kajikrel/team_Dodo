@@ -32,7 +32,7 @@ scheduleTable.addEventListener("mouseup", () => {
 scheduleTable.addEventListener("mousemove", (event) => {
 	if (isMouseDown && event.target.tagName === "TD") {
 		isDragging = true; // マウスが動いていれば、ドラッグ状態とみなす
-		event.target.classList.add("is-free");
+		event.target.classList.add(userInputCellColor());
 		const dateAttr = event.target.getAttribute("data-date");
 		if (!selectingDates.includes(dateAttr)) {
 			selectingDates.push(dateAttr);
@@ -50,9 +50,9 @@ scheduleTable.addEventListener("click", (event) => {
 		}
 
 		const td = event.target;
-		td.classList.toggle("is-free"); // クラスのトグル
+		td.classList.toggle(userInputCellColor()); // クラスのトグル
 		const dateAttr = td.getAttribute("data-date");
-		if (td.classList.contains("is-free")) {
+		if (td.classList.contains(userInputCellColor())) {
 			if (!selectingDates.includes(dateAttr)) {
 				selectingDates.push(dateAttr);
 			}
@@ -119,3 +119,9 @@ saveButton.addEventListener("click", (event) => {
     console.error("エラーが発生しました", error);
   });
 });
+
+// ユーザーごとに入力するセルの色を変える処理
+const userInputCellColor = () => {
+  const userId = window.location.pathname.split('/')[2];
+  return `user-color-${userId}`
+}
