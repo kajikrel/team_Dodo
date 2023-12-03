@@ -191,6 +191,14 @@ tbody td {
   margin-top: 2px;
 }
 
+.sunday {
+  color: #FF587F;
+}
+
+.saturday {
+  color: #00C9EB;
+}
+
 .time-24 {
   font-size: 12px;
   font-weight: bold;
