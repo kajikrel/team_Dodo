@@ -237,17 +237,33 @@ footer p {
 /* user_page */
 .input-area-user-page {
   justify-content: end;
+  gap: 14px;
+}
+
+.user-page-button {
+  width: 120px;
+  height: 50px;
+  font-family: inherit;
+  font-size: 14px;
+  text-align: center;
+  line-height: 50px;
+  border: 1px solid #333;
+  border-radius: 24px;
+  cursor: pointer;
 }
 
 .save-button {
-  width: 120px;
-  height: 50px;
-  border-radius: 24px;
   background-color: #DEC9BD;
-  border: 1px solid #333;
-  text-align: center;
-  line-height: 50px;
-  cursor: pointer;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button-small {
+  font-size: 10px;
 }
 
 .draggable-date-section-user-page {
