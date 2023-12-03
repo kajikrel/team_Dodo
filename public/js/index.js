@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     userForm.addEventListener('submit', (event) => {
       event.preventDefault(); // フォームのデフォルトの送信を防ぐ
 
-      const userName = document.getElementById('user-name').value.trim();
+      const userNameForm = document.getElementById('user-name');
+      const userName = userNameForm.value.trim();
       const formData = new FormData();
       formData.append('user-name', userName);
 
@@ -52,6 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
           alert('エラーが発生しました: ' + error); // エラーをアラート表示
         });
+
+      // フォームを空にする
+      userNameForm.value = '';
     });
 
     // 日付入力イベント
