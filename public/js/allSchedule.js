@@ -38,7 +38,7 @@ const renderDates = (baseDate) => {
     const day = dayOfWeek[currentDay.getDay()]; // 曜日
 
     const date_th = document.createElement("th");
-    date_th.innerHTML = `<div>${month}/${date}<div><div class="day">${day}</div>`;
+    date_th.innerHTML = `<div class="th-date">${month}/${date}<div><div class="th-day">${day}</div>`;
     date_th.classList.add("date");
     datesParent.appendChild(date_th);
   }
